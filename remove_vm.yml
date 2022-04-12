@@ -6,11 +6,11 @@
   tasks:
   - name: Force remove
     vmware_guest:
-      hostname: 172.20.10.21
-      username: administrator@lab.local
-      password: "{{ rootpass }}"
+      hostname: "{{ vcenter }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
       validate_certs: False
-      name: testvm_2
+      name: "{{ vmname }}"
       state: absent
       force: true
 
