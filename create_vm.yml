@@ -1,0 +1,31 @@
+---
+- name: Create a VM from a template
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+  - name: Clone the template
+    vmware_guest:
+      hostname: 172.20.10.21
+      username: administrator@lab.local
+      password: "{{ rootpass }}"
+      validate_certs: False
+      name: testvm_2
+      template: rhel85
+      datacenter: Datacenter
+      folder: /
+      state: poweredon
+      networks:
+        - name: VM Network
+          ip: 172.20.10.40
+          netmask: 255.255.255.0
+          start_connected: True
+      wait_for_ip_address: True
+      customization:
+        domain: lab.local
+        dns_servers:
+          - 172.20.10.9
+        dns_suffix:
+          - lab.local
+    delegate_to: localhost
+
