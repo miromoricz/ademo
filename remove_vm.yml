@@ -1,0 +1,16 @@
+---
+- name: Removing VM
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+  - name: Force remove
+    vmware_guest:
+      hostname: 172.20.10.21
+      username: administrator@lab.local
+      password: "{{ rootpass }}"
+      validate_certs: False
+      name: testvm_2
+      state: absent
+      force: true
+
